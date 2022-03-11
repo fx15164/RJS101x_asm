@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, CardBody } from "reactstrap";
+import dateFormat from 'dateformat';
 
 class StaffDetail extends Component {
     render() {

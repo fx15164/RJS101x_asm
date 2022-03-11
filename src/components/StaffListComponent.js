@@ -17,6 +17,7 @@ class StaffList extends Component {
     }
 
     render() {
+        const { selectedStaff } = this.state;
         const { staffs } = this.props;
         return (
             <div className="container">
