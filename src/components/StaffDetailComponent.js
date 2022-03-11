@@ -9,6 +9,8 @@ class StaffDetail extends Component {
                 <Card>
                     <CardBody>
                         <h4>HỌ và tên: {name}</h4>
+                        <p>Ngày sinh: {dateFormat(doB, "dd/mm/yyyy")}</p>
+                        <p>Ngày vào công ty: {dateFormat(startDate, "dd/mm/yyyy")}</p>
                         <p>Phòng ban: {department.name}</p>
                         <p>Số ngày nghỉ còn lại: {annualLeave}</p>
                         <p>Số ngày đã làm thêm: {overTime}</p>
