@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, CardBody, CardTitle } from 'reactstrap';
+import StaffDetail from "./StaffDetailComponent";
 
 
 class StaffList extends Component {
@@ -13,7 +14,6 @@ class StaffList extends Component {
 
     selectStaff(staff) {
         this.setState({ selectedStaff: staff });
-        console.log(staff);
     }
 
     render() {
@@ -30,6 +30,10 @@ class StaffList extends Component {
                             </Card>
                         </div>
                     ))}
+                </div>
+                <p className="m-1">Bấm vào tên nhân viên để thêm thông tin</p>
+                <div className="row">
+                    {selectedStaff ? <StaffDetail staff={selectedStaff} /> : ''}
                 </div>
             </div>
         )
