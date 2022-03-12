@@ -3,8 +3,10 @@ import { Card, CardBody } from "reactstrap";
 import dateFormat from 'dateformat';
 
 class StaffDetail extends Component {
+    
     render() {
         const { name, doB, startDate, department, annualLeave, overTime } = this.props.staff;
+
         return (
             <div className="col-12 col-sm-6 col-lg-4 m-1">
                 <Card>

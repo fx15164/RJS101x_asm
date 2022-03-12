@@ -17,15 +17,23 @@ class StaffList extends Component {
         this.setState({ selectedStaff: staff });
     }
 
+    changeColumn(column) {
+        this.setState({ column });
+    }
+
     render() {
-        const { column, selectedStaff } = this.state;
+
         const { staffs } = this.props;
+        const { column, selectedStaff } = this.state;
+
+        const itemClass = column != 0 ? `col-${12 / column}` : 'col-12 col-sm-6 col-lg-4';
 
         return (
             <div className="container">
                 <div className="row m-1">
-                    <select className="form-select w-auto" value={column}
-                        onChange={e => {}}
+                    <select className="form-select w-auto" 
+                        value={column}
+                        onChange={e => this.changeColumn(e.target.value)}
                     >
                         <option value="0">Mặc định</option>
                         <option value="1">1 Cột</option>
@@ -36,8 +44,10 @@ class StaffList extends Component {
 
                 <div className="row">
                     {staffs.map(staff => (
-                        <div key={staff.id} className="col-12 col-sm-6 col-lg-4">
-                            <Card onClick={() => this.selectStaff(staff)} className="m-1">
+                        <div key={staff.id} className={itemClass}>
+                            <Card className="m-1"
+                                onClick={() => this.selectStaff(staff)}
+                            >
                                 <CardBody>
                                     <CardTitle>{staff.name}</CardTitle>
                                 </CardBody>
@@ -47,7 +57,6 @@ class StaffList extends Component {
                 </div>
 
                 <p className="m-1">Bấm vào tên nhân viên để thêm thông tin</p>
-
                 <div className="row">
                     {selectedStaff ? <StaffDetail staff={selectedStaff} /> : ''}
                 </div>
