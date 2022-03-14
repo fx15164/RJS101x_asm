@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardBody, CardImg, CardTitle } from 'reactstrap';
 import StaffDetail from "./StaffDetailComponent";
 
 
@@ -26,10 +26,14 @@ class StaffList extends Component {
         const { staffs } = this.props;
         const { column, selectedStaff } = this.state;
 
-        const itemClass = column != 0 ? `col-${12 / column}` : 'col-12 col-sm-6 col-lg-4';
+        const itemClass = column != 0 ? `col-${12 / column}` : 'col-6 col-sm-4 col-lg-2';
 
         return (
             <div className="container">
+                <div className="row">
+                    <h4>Nhân viên</h4>
+                    <div className="m-2 border-bottom"></div>
+                </div>
                 <div className="row m-1">
                     <select className="form-select w-auto" 
                         value={column}
@@ -48,8 +52,9 @@ class StaffList extends Component {
                             <Card className="m-1"
                                 onClick={() => this.selectStaff(staff)}
                             >
+                                <CardImg src="/assets/images/alberto.png" />
                                 <CardBody>
-                                    <CardTitle>{staff.name}</CardTitle>
+                                    <CardTitle className="text-center">{staff.name}</CardTitle>
                                 </CardBody>
                             </Card>
                         </div>

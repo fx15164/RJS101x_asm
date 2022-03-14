@@ -1,7 +1,9 @@
-import Reac, { Component } from "react";
-import { Navbar, NavbarBrand } from 'reactstrap';
+import React, { Component } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Header from "./components/HeaderComponent";
 import StaffList from "./components/StaffListComponent";
 import { STAFFS } from './shared/staffs';
+import './App.css';
 
 class App extends Component {
 
@@ -18,12 +20,13 @@ class App extends Component {
 
     return (
       <div>
-        <Navbar dark color='primary'>
-          <div className="container">
-            <NavbarBrand>Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
-          </div>
-        </Navbar>
-        <StaffList staffs={staffs} />
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/nhanvien" element={<StaffList staffs={staffs} />} />
+            <Route path="*" element={<Navigate to='/nhanvien' />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     )
   }
