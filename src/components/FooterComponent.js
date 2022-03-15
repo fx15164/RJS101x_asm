@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer(props) {
     return (
-        <div className="container">
+        <div className="container mt-1">
             <div className="footer">
                 <div className="row">
                     <div className="col-12 col-md-5 d-md-flex justify-content-center">

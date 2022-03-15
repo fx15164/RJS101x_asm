@@ -12,7 +12,7 @@ function StaffDetail({ staff }) {
     const { name, doB, startDate, department, annualLeave, overTime } = staff;
 
     return (
-        <div className="container">
+        <div className="container mb-2">
             <div className="row">
                 <Breadcrumb>
                     <BreadcrumbItem><Link to='/nhanvien'>Nhân viên</Link></BreadcrumbItem>
