@@ -21,7 +21,7 @@ class StaffList extends Component {
         const { staffs } = this.props;
         const { column } = this.state;
 
-        const itemClass = parseInt(column) !== 0 ? `col-${12 / column}` : 'col-6 col-sm-4 col-lg-2';
+        const itemClass = parseInt(column) !== 0 ? `col-${12 / column}` : 'col-6 col-md-4 col-lg-2';
 
         function RenderStaff({ staff }) {
             return (

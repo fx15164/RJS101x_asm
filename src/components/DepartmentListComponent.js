@@ -5,7 +5,7 @@ const DepartmentList = ({ departments }) => (
     <div className="container">
         <div className="row">
             {departments.map(department => (
-                <div key={department.id} className="col-12 col-sm-6 col-lg-4">
+                <div key={department.id} className="col-12 col-md-6 col-lg-4">
                     <Card className="m-1">
                         <CardBody>
                             <h4>{department.name}</h4>

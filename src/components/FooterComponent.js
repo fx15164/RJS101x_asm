@@ -5,7 +5,7 @@ function Footer(props) {
         <div className="container">
             <div className="footer">
                 <div className="row">
-                    <div className="col-12 col-sm-5 d-sm-flex justify-content-center">
+                    <div className="col-12 col-md-5 d-md-flex justify-content-center">
                         <div className='p-2'>
                             <h5>Our Address</h5>
                             <address>
@@ -19,7 +19,7 @@ function Footer(props) {
                             </address>
                         </div>
                     </div>
-                    <div className="col-12 col-sm-6 align-self-center">
+                    <div className="col-12 col-md-6 align-self-center">
                         <div className="text-center">
                             <a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus"></i></a>
                             <a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a>

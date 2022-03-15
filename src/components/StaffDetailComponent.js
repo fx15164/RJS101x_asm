@@ -23,11 +23,11 @@ class StaffDetail extends Component {
                     </Breadcrumb>
                 </div>
                 <div className="row">
-                    <div className="col-12 col-sm-4 col-lg-3">
+                    <div className="col-12 col-md-4 col-lg-3">
                         <img style={{ width: '100%', height: 'auto' }} 
                             src="../assets/images/alberto.png" alt={name} />
                     </div>
-                    <div className="col-12 col-sm-8 col-lg-9">
+                    <div className="col-12 col-md-8 col-lg-9">
                         <h4>Họ và tên: {name}</h4>
                         <p>Ngày sinh: {dateFormat(doB, "dd/mm/yyyy")}</p>
                         <p>Ngày vào công ty: {dateFormat(startDate, "dd/mm/yyyy")}</p>
