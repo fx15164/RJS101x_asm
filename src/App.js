@@ -7,6 +7,7 @@ import Footer from "./components/FooterComponent";
 import DepartmentList from "./components/DepartmentListComponent";
 import { STAFFS, DEPARTMENTS } from './shared/staffs';
 import './App.css';
+import SalaryTable from "./components/SalaryTableComponent";
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
             <Route path="/nhanvien" element={<StaffList staffs={staffs} />} />
             <Route path="/nhanvien/:id" element={<StaffWithId />} />
             <Route path="/phongban" element={<DepartmentList departments={departments} />} />
+            <Route path="/bangluong" element={<SalaryTable staffs={staffs} />} />
             <Route path="*" element={<Navigate to='/nhanvien' />} />
           </Routes>
           <Footer />
