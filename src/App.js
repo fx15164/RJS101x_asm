@@ -5,6 +5,7 @@ import StaffList from "./components/StaffListComponent";
 import StaffDetail from './components/StaffDetailComponent';
 import { STAFFS } from './shared/staffs';
 import './App.css';
+import Footer from "./components/FooterComponent";
 
 class App extends Component {
 
@@ -33,6 +34,7 @@ class App extends Component {
             <Route path="/nhanvien/:id" element={<StaffWithId />} />
             <Route path="*" element={<Navigate to='/nhanvien' />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </div>
     )
