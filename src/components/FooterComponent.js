@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function Footer(props) {
     return (
@@ -7,7 +6,7 @@ function Footer(props) {
             <div className="footer">
                 <div className="row">
                     <div className="col-12 col-sm-5 d-sm-flex justify-content-center">
-                        <div>
+                        <div className='p-2'>
                             <h5>Our Address</h5>
                             <address>
                                 121, Clear Water Bay Road<br />

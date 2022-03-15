@@ -3,26 +3,28 @@ import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-
 import Header from "./components/HeaderComponent";
 import StaffList from "./components/StaffListComponent";
 import StaffDetail from './components/StaffDetailComponent';
-import { STAFFS } from './shared/staffs';
-import './App.css';
 import Footer from "./components/FooterComponent";
+import DepartmentList from "./components/DepartmentListComponent";
+import { STAFFS, DEPARTMENTS } from './shared/staffs';
+import './App.css';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      staffs: STAFFS
+      staffs: STAFFS,
+      departments: DEPARTMENTS
     }
   }
 
   render() {
 
-    const { staffs } = this.state;
+    const { staffs, departments } = this.state;
 
     const StaffWithId = (props) => {
       const { id } = useParams();
-      return <StaffDetail staff={staffs.filter(staff => staff.id == id)[0]} />
+      return <StaffDetail staff={staffs.filter(staff => staff.id === parseInt(id))[0]} />
     }
 
     return (
@@ -32,6 +34,7 @@ class App extends Component {
           <Routes>
             <Route path="/nhanvien" element={<StaffList staffs={staffs} />} />
             <Route path="/nhanvien/:id" element={<StaffWithId />} />
+            <Route path="/phongban" element={<DepartmentList departments={departments} />} />
             <Route path="*" element={<Navigate to='/nhanvien' />} />
           </Routes>
           <Footer />

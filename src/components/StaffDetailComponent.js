@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Breadcrumb, BreadcrumbItem, Card, CardBody } from "reactstrap";
+import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import dateFormat from 'dateformat';
 import { Link } from "react-router-dom";
 
@@ -24,7 +24,8 @@ class StaffDetail extends Component {
                 </div>
                 <div className="row">
                     <div className="col-12 col-sm-4 col-lg-3">
-                        <img style={{ width: '100%', height: 'auto' }} src="../assets/images/alberto.png" />
+                        <img style={{ width: '100%', height: 'auto' }} 
+                            src="../assets/images/alberto.png" alt={name} />
                     </div>
                     <div className="col-12 col-sm-8 col-lg-9">
                         <h4>Họ và tên: {name}</h4>
