@@ -6,7 +6,6 @@ const SalaryTable = ({ staffs }) => {
 
     const [sortBy, setSortBy] = useState(0);
 
-    // Cal salary
     for (let i in staffs) {
         const { salaryScale, overTime } = staffs[i];
         staffs[i].salary = Math.round(salaryScale * 3000000 + (overTime / 8) * 200000);
