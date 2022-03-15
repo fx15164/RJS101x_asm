@@ -23,6 +23,19 @@ class StaffList extends Component {
 
         const itemClass = parseInt(column) !== 0 ? `col-${12 / column}` : 'col-6 col-sm-4 col-lg-2';
 
+        function RenderStaff({ staff }) {
+            return (
+                <Card className="m-1">
+                    <Link to={`/nhanvien/${staff.id}`} style={{ textDecoration: 'none' }}>
+                        <CardImg src="assets/images/alberto.png" />
+                        <CardBody>
+                            <CardTitle className="text-center">{staff.name}</CardTitle>
+                        </CardBody>
+                    </Link>
+                </Card>
+            )
+        }
+
         return (
             <div className="container">
                 <div className="row">
@@ -44,14 +57,7 @@ class StaffList extends Component {
                 <div className="row">
                     {staffs.map(staff => (
                         <div key={staff.id} className={itemClass}>
-                            <Card className="m-1">
-                            <Link to={`/nhanvien/${staff.id}`} style={{textDecoration: 'none'}}>
-                                    <CardImg src="assets/images/alberto.png" />
-                                    <CardBody>
-                                        <CardTitle className="text-center">{staff.name}</CardTitle>
-                                    </CardBody>
-                                </Link>
-                            </Card>
+                            <RenderStaff staff={staff} />
                         </div>
                     ))}
                 </div>
