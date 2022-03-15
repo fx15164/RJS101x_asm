@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardBody, CardImg, CardTitle } from 'reactstrap';
-import StaffDetail from "./StaffDetailComponent";
 
 
 class StaffList extends Component {
@@ -8,13 +8,8 @@ class StaffList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            column: 0,
-            selectedStaff: null
+            column: 0
         }
-    }
-
-    selectStaff(staff) {
-        this.setState({ selectedStaff: staff });
     }
 
     changeColumn(column) {
@@ -24,7 +19,7 @@ class StaffList extends Component {
     render() {
 
         const { staffs } = this.props;
-        const { column, selectedStaff } = this.state;
+        const { column } = this.state;
 
         const itemClass = column != 0 ? `col-${12 / column}` : 'col-6 col-sm-4 col-lg-2';
 
@@ -35,7 +30,7 @@ class StaffList extends Component {
                     <div className="m-2 border-bottom"></div>
                 </div>
                 <div className="row m-1">
-                    <select className="form-select w-auto" 
+                    <select className="form-select w-auto"
                         value={column}
                         onChange={e => this.changeColumn(e.target.value)}
                     >
@@ -49,21 +44,16 @@ class StaffList extends Component {
                 <div className="row">
                     {staffs.map(staff => (
                         <div key={staff.id} className={itemClass}>
-                            <Card className="m-1"
-                                onClick={() => this.selectStaff(staff)}
-                            >
-                                <CardImg src="/assets/images/alberto.png" />
-                                <CardBody>
-                                    <CardTitle className="text-center">{staff.name}</CardTitle>
-                                </CardBody>
+                            <Card className="m-1">
+                            <Link to={`/nhanvien/${staff.id}`} style={{textDecoration: 'none'}}>
+                                    <CardImg src="assets/images/alberto.png" />
+                                    <CardBody>
+                                        <CardTitle className="text-center">{staff.name}</CardTitle>
+                                    </CardBody>
+                                </Link>
                             </Card>
                         </div>
                     ))}
-                </div>
-
-                <p className="m-1">Bấm vào tên nhân viên để thêm thông tin</p>
-                <div className="row">
-                    {selectedStaff ? <StaffDetail staff={selectedStaff} /> : ''}
                 </div>
             </div>
         )
