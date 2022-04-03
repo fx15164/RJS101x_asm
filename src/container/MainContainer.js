@@ -16,7 +16,13 @@ class App extends Component {
             staffs: STAFFS,
             departments: DEPARTMENTS
         }
+		this.onAddStaff = this.onAddStaff.bind(this);
     }
+
+	onAddStaff(staff) {
+		staff.id = this.state.staffs.length;
+		this.setState({ staffs: this.state.staffs.concat(staff)});
+	}
 
     render() {
 
@@ -31,7 +37,7 @@ class App extends Component {
             <div>
                 <Header />
                 <Routes>
-                    <Route path="/nhanvien" element={<StaffList staffs={staffs} />} />
+                    <Route path="/nhanvien" element={<StaffList staffs={staffs} onAddStaff={this.onAddStaff} />} />
                     <Route path="/nhanvien/:id" element={<StaffWithId />} />
                     <Route path="/phongban" element={<DepartmentList departments={departments} />} />
                     <Route path="/bangluong" element={<SalaryTable staffs={staffs} />} />
