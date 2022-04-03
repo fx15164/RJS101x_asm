@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import {Link} from "react-router-dom";
-import {Card, CardBody, CardImg, CardTitle} from 'reactstrap';
+import {Card, CardBody, CardImg, CardTitle, Modal, ModalBody} from 'reactstrap';
 import StaffForm from './StaffFormComponent';
 
 function RenderStaff({staff}) {
@@ -36,12 +36,20 @@ function StaffList({staffs, onAddStaff}) {
 		e.preventDefault();
 		setKeyword(searchInput.current.value);
 	}
+	const addStaff = (staff) => {
+		toggleForm();
+		onAddStaff(staff);
+	}
 
 	const toggleForm = () => setFormOpen(!isFormOpen);
 
 	return (
 		<div className="container">
-			<StaffForm isOpen={isFormOpen} toggle={toggleForm} addStaff={onAddStaff} />
+			<Modal isOpen={isFormOpen} toggle={toggleForm}>
+				<ModalBody>
+					<StaffForm onSubmit={addStaff} />
+				</ModalBody>
+			</Modal>
 			<div className="row">
 				<div className="d-flex p-2">
 					<h4>Nhân viên</h4>

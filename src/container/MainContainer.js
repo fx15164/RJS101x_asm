@@ -6,27 +6,24 @@ import StaffDetail from '../components/StaffDetailComponent';
 import Footer from "../components/FooterComponent";
 import DepartmentList from "../components/DepartmentListComponent";
 import SalaryTable from "../components/SalaryTableComponent";
-import { STAFFS, DEPARTMENTS } from '../shared/staffs';
+import {connect} from "react-redux";
 
-class App extends Component {
+class Main extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            staffs: STAFFS,
-            departments: DEPARTMENTS
-        }
 		this.onAddStaff = this.onAddStaff.bind(this);
     }
 
 	onAddStaff(staff) {
-		staff.id = this.state.staffs.length;
-		this.setState({ staffs: this.state.staffs.concat(staff)});
+		staff.id = this.props.staffs.length;
+		staff.department = this.props.departments[staff.department];
+		this.props.addStaff(staff);
 	}
 
     render() {
 
-        const { staffs, departments } = this.state;
+        const { staffs, departments } = this.props;
 
         const StaffWithId = (props) => {
             const { id } = useParams();
@@ -49,4 +46,12 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => ({
+	staffs: state.staffs,
+	departments: state.departments
+})
+const mapStateToDispatch = dispatch => ({
+	addStaff: staff => dispatch({ type: 'ADD_STAFF', payload: staff })
+})
+
+export default connect(mapStateToProps, mapStateToDispatch)(Main);
