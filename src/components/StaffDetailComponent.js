@@ -1,15 +1,23 @@
 import React from "react";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import dateFormat from 'dateformat';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function StaffDetail({ staff }) {
+function StaffDetail({ staff, departments, deleteStaff }) {
+	const navigate = useNavigate();
 
     if (!staff) {
         return <></>;
     }
 
-    const { name, doB, startDate, annualLeave, overTime } = staff;
+    const { id, name, doB, startDate, annualLeave, overTime, departmentId } = staff;
+	const department = departments.filter(departments => departments.id === departmentId)[0];
+
+
+	const handleDelete = () => {
+		deleteStaff(id);
+		navigate('../');
+	}
 
     return (
         <div className="container mb-2">
@@ -28,11 +36,17 @@ function StaffDetail({ staff }) {
                     <h4>Họ và tên: {name}</h4>
                     <p>Ngày sinh: {dateFormat(doB, "dd/mm/yyyy")}</p>
                     <p>Ngày vào công ty: {dateFormat(startDate, "dd/mm/yyyy")}</p>
-					{/*  <p>Phòng ban: {department.name}</p> */}
+					{department && <p>Phòng ban: {department.name}</p>}
                     <p>Số ngày nghỉ còn lại: {annualLeave}</p>
                     <p>Số ngày đã làm thêm: {overTime}</p>
                 </div>
             </div>
+			<div className="row">
+				<div className="col-12 text-center">
+					<button className="btn btn-primary mx-2">Chỉnh sửa</button>
+					<button className="btn btn-danger mx-2" onClick={handleDelete}>Xóa bỏ</button>
+				</div>
+			</div>
         </div>
     )
 }

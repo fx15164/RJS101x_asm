@@ -26,7 +26,7 @@ function RenderStaff({staff}) {
 }
 
 
-function StaffList({staffs, onAddStaff}) {
+function StaffList({staffs, onAddStaff, departments}) {
 
 	const [column, setColumn] = useState(0);
 	const [isFormOpen, setFormOpen] = useState(false);
@@ -57,7 +57,7 @@ function StaffList({staffs, onAddStaff}) {
 		<div className="container">
 			<Modal isOpen={isFormOpen} toggle={toggleForm}>
 				<ModalBody>
-					<StaffForm onSubmit={addStaff} />
+					<StaffForm onSubmit={addStaff} departments={departments} />
 				</ModalBody>
 			</Modal>
 			<div className="row">

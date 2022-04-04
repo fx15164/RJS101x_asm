@@ -7,7 +7,7 @@ import StaffDetail from '../components/StaffDetailComponent';
 import Footer from "../components/FooterComponent";
 import DepartmentList from "../components/DepartmentListComponent";
 import SalaryTable from "../components/SalaryTableComponent";
-import {fetchDepartments, fetchStaffs} from '../redux/actionCreators';
+import {addStaff, deleteStaff, fetchDepartments, fetchStaffs} from '../redux/actionCreators';
 
 class Main extends Component {
 
@@ -23,31 +23,35 @@ class Main extends Component {
 
 	onAddStaff(staff) {
 		staff.id = this.props.staffs.length;
-		staff.department = this.props.departments[staff.department];
+		staff.departmentId = this.props.departments[staff.department].id;
 		this.props.addStaff(staff);
 	}
 
     render() {
 
-        const { staffs, departments } = this.props;
+        const { staffs, departments, deleteStaff } = this.props;
 
         const StaffWithId = (props) => {
             const { id } = useParams();
-            return <StaffDetail staff={staffs.filter(staff => staff.id === parseInt(id))[0]} />
+			return <StaffDetail deleteStaff={deleteStaff} 
+				staff={staffs.filter(staff => staff.id === parseInt(id))[0]} departments={departments} />
         }
 
 		const DepartmentWithId = () => {
 			const { id } = useParams();
-			return <StaffList staffs={staffs.filter(staff => staff.departmentId === id)} />
+			return <StaffList 
+				departments={departments} onAddStaff={this.onAddStaff}
+				staffs={staffs.filter(staff => staff.departmentId === id)} />
 		}
 
         return (
             <div>
                 <Header />
                 <Routes>
-                    <Route path="/nhanvien" element={<StaffList staffs={staffs} onAddStaff={this.onAddStaff} />} />
-                    <Route path="/nhanvien/:id" element={<StaffWithId />} />
+					<Route path="/nhanvien"
+						element={<StaffList staffs={staffs} departments={departments} onAddStaff={this.onAddStaff} />} />
                     <Route path="/phongban" element={<DepartmentList departments={departments} />} />
+                    <Route path="/nhanvien/:id" element={<StaffWithId />} />
 					<Route path="/phongban/:id" element={<DepartmentWithId />} />
                     <Route path="/bangluong" element={<SalaryTable />} />
                     <Route path="*" element={<Navigate to='/nhanvien' />} />
@@ -65,7 +69,8 @@ const mapStateToProps = state => ({
 const mapStateToDispatch = dispatch => ({
 	fetchStaffs: () => dispatch(fetchStaffs()),
 	fetchDepartments: () => dispatch(fetchDepartments()),
-	addStaff: staff => dispatch({ type: 'ADD_STAFF', payload: staff })
+	addStaff: staff => dispatch(addStaff(staff)),
+	deleteStaff: id => dispatch(deleteStaff(id))
 })
 
 export default connect(mapStateToProps, mapStateToDispatch)(Main);

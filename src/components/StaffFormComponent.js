@@ -26,8 +26,7 @@ const minLength = min => value =>
 const minLength2 = minLength(2);
 const maxLength30 = maxLength(30);
 
-const StaffForm = ({ handleSubmit, submitting }) => {
-
+const StaffForm = ({ handleSubmit, submitting, departments }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<Field name="name" label="Tên" 
@@ -45,11 +44,11 @@ const StaffForm = ({ handleSubmit, submitting }) => {
 				component={renderField}
 				validate={required}
 			/>
-			{/* <Field name="department" label="Phòng ban" 
+			<Field name="department" label="Phòng ban" 
 				info={{type: 'select'}} component={renderField}
 			>
-				{DEPARTMENTS.map((department, i) => <option key={i} value={i}>{department.name}</option>)}
-			</Field>*/}
+				{departments.map((department, i) => <option key={i} value={i}>{department.name}</option>)}
+			</Field>
 			<Field name="salaryScale"
 				label="Hệ số lương"
 				info={{type: 'number', min: '1', step: '0.1'}}
