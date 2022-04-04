@@ -1,16 +1,9 @@
-import { STAFFS } from '../../shared/staffs';
+import { STAFFS_LOADING }from '../actionTypes';
 
-let initialState = STAFFS;
-if (localStorage.getItem('staffs')) {
-	initialState = JSON.parse(localStorage.getItem('staffs'));
-}
-
-const staffs = (state = initialState, action) => {
+const staffs = (state = [], action) => {
 	switch (action.type) {
-		case 'ADD_STAFF':
-			const newstate = [...state, action.payload];
-			localStorage.setItem('staffs', JSON.stringify(newstate));
-			return newstate; 
+		case STAFFS_LOADING:
+			return [...action.payload];
 		default:
 			return state;
 	}

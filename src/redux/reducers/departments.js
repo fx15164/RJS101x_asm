@@ -1,10 +1,13 @@
 
-import { DEPARTMENTS } from '../../shared/staffs';
+import {DEPARTMENTS_LOADING} from '../actionTypes';
 
-const initialState = DEPARTMENTS;
-
-const departments = (state = initialState, action) => {
-	return state;
+const departments = (state = [], action) => {
+	switch (action.type) {
+		case DEPARTMENTS_LOADING:
+			return [...action.payload];
+		default:
+			return state;
+	}
 }
 
 export default departments;

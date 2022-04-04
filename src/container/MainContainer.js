@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { connect } from "react-redux";
 import Header from "../components/HeaderComponent";
 import StaffList from "../components/StaffListComponent";
 import StaffDetail from '../components/StaffDetailComponent';
 import Footer from "../components/FooterComponent";
 import DepartmentList from "../components/DepartmentListComponent";
 import SalaryTable from "../components/SalaryTableComponent";
-import {connect} from "react-redux";
+import {fetchDepartments, fetchStaffs} from '../redux/actionCreators';
 
 class Main extends Component {
 
@@ -14,6 +15,11 @@ class Main extends Component {
         super(props);
 		this.onAddStaff = this.onAddStaff.bind(this);
     }
+
+	componentDidMount() {
+		this.props.fetchStaffs();
+		this.props.fetchDepartments();
+	}
 
 	onAddStaff(staff) {
 		staff.id = this.props.staffs.length;
@@ -30,6 +36,11 @@ class Main extends Component {
             return <StaffDetail staff={staffs.filter(staff => staff.id === parseInt(id))[0]} />
         }
 
+		const DepartmentWithId = () => {
+			const { id } = useParams();
+			return <StaffList staffs={staffs.filter(staff => staff.departmentId === id)} />
+		}
+
         return (
             <div>
                 <Header />
@@ -37,7 +48,8 @@ class Main extends Component {
                     <Route path="/nhanvien" element={<StaffList staffs={staffs} onAddStaff={this.onAddStaff} />} />
                     <Route path="/nhanvien/:id" element={<StaffWithId />} />
                     <Route path="/phongban" element={<DepartmentList departments={departments} />} />
-                    <Route path="/bangluong" element={<SalaryTable staffs={staffs} />} />
+					<Route path="/phongban/:id" element={<DepartmentWithId />} />
+                    <Route path="/bangluong" element={<SalaryTable />} />
                     <Route path="*" element={<Navigate to='/nhanvien' />} />
                 </Routes>
                 <Footer />
@@ -51,6 +63,8 @@ const mapStateToProps = state => ({
 	departments: state.departments
 })
 const mapStateToDispatch = dispatch => ({
+	fetchStaffs: () => dispatch(fetchStaffs()),
+	fetchDepartments: () => dispatch(fetchDepartments()),
 	addStaff: staff => dispatch({ type: 'ADD_STAFF', payload: staff })
 })
 

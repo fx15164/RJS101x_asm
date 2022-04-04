@@ -9,7 +9,7 @@ function StaffDetail({ staff }) {
         return <></>;
     }
 
-    const { name, doB, startDate, department, annualLeave, overTime } = staff;
+    const { name, doB, startDate, annualLeave, overTime } = staff;
 
     return (
         <div className="container mb-2">
@@ -28,7 +28,7 @@ function StaffDetail({ staff }) {
                     <h4>Họ và tên: {name}</h4>
                     <p>Ngày sinh: {dateFormat(doB, "dd/mm/yyyy")}</p>
                     <p>Ngày vào công ty: {dateFormat(startDate, "dd/mm/yyyy")}</p>
-                    <p>Phòng ban: {department.name}</p>
+					{/*  <p>Phòng ban: {department.name}</p> */}
                     <p>Số ngày nghỉ còn lại: {annualLeave}</p>
                     <p>Số ngày đã làm thêm: {overTime}</p>
                 </div>

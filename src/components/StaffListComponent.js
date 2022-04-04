@@ -1,18 +1,27 @@
 import React, {useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import {Card, CardBody, CardImg, CardTitle, Modal, ModalBody} from 'reactstrap';
+import {useSpring, animated} from "react-spring";
 import StaffForm from './StaffFormComponent';
 
+
 function RenderStaff({staff}) {
+	const props = useSpring({
+		to: {opacity: 1, x: 0},
+		from: {opacity: 0, x: -100},
+		config: {delay: 200, duration: 1000}
+	});
 	return (
-		<Card className="m-1">
-			<Link to={`/nhanvien/${staff.id}`} style={{textDecoration: 'none'}}>
-				<CardImg src="assets/images/alberto.png" />
-				<CardBody>
-					<CardTitle className="text-center">{staff.name}</CardTitle>
-				</CardBody>
-			</Link>
-		</Card>
+		<animated.div style={props}>
+			<Card className="m-1">
+				<Link to={`/nhanvien/${staff.id}`} style={{textDecoration: 'none'}}>
+					<CardImg src="/assets/images/alberto.png" />
+					<CardBody>
+						<CardTitle className="text-center">{staff.name}</CardTitle>
+					</CardBody>
+				</Link>
+			</Card>
+		</animated.div>
 	)
 }
 
@@ -25,6 +34,7 @@ function StaffList({staffs, onAddStaff}) {
 	const searchInput = useRef();
 
 	const list = staffs.filter(staff => {
+		if (!staff.name) return false;
 		const name = staff.name.toUpperCase();
 		return name.search(keyword.toUpperCase()) != -1;
 	});

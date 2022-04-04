@@ -3,3 +3,27 @@
     margin:0px auto;
     padding: 20px 0px 20px 0px;
 }
+
+a {
+	text-decoration: none;
+}
+
+
+.my-node-enter {
+  opacity: 0;
+  display: none
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+  display: none
+}
+.my-node-exit {
+  opacity: 1;
+  display: none
+}
+.my-node-exit-active {
+  opacity: 0;
+  display: none;
+  transition: opacity 200ms;
+}

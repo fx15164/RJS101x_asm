@@ -1,6 +1,5 @@
 import React from "react";
 import {reduxForm, Field} from "redux-form";
-import {DEPARTMENTS} from "../shared/staffs";
 
 const renderField = ({input, label, info, children, meta: {touched, error}}) => (
 	<div className="form-group row">
@@ -46,11 +45,11 @@ const StaffForm = ({ handleSubmit, submitting }) => {
 				component={renderField}
 				validate={required}
 			/>
-			<Field name="department" label="Phòng ban" 
+			{/* <Field name="department" label="Phòng ban" 
 				info={{type: 'select'}} component={renderField}
 			>
 				{DEPARTMENTS.map((department, i) => <option key={i} value={i}>{department.name}</option>)}
-			</Field>
+			</Field>*/}
 			<Field name="salaryScale"
 				label="Hệ số lương"
 				info={{type: 'number', min: '1', step: '0.1'}}
