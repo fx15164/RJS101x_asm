@@ -1,22 +1,36 @@
-import React from "react";
-import { Breadcrumb, BreadcrumbItem } from "reactstrap";
-import dateFormat from 'dateformat';
+import React, { useState } from "react";
+import { Breadcrumb, BreadcrumbItem, Modal, ModalBody } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
+import dateFormat from 'dateformat';
+import StaffForm from "./StaffFormComponent";
 
-function StaffDetail({ staff, departments, deleteStaff }) {
+function StaffDetail({ staff, departments, deleteStaff, editStaff}) {
 	const navigate = useNavigate();
+	const [isFormOpen, setFormOpen] = useState(false);
 
     if (!staff) {
         return <></>;
     }
 
-    const { id, name, doB, startDate, annualLeave, overTime, departmentId } = staff;
-	const department = departments.filter(departments => departments.id === departmentId)[0];
+    const { id, name, doB, startDate, annualLeave, overTime, departmentId, salaryScale } = staff;
 
+	let department = departments.filter(department => department.id === departmentId)[0];
+	if (!department) {
+		department = departments[0];
+	}
+	department.index = departments.findIndex(department => department.id === departmentId);
+	
 
 	const handleDelete = () => {
 		deleteStaff(id);
 		navigate('../');
+	}
+
+	const toggleForm = () => setFormOpen(!isFormOpen);
+
+	const handleEditSubmit = (staff) => {
+		editStaff(staff);
+		toggleForm();
 	}
 
     return (
@@ -43,10 +57,24 @@ function StaffDetail({ staff, departments, deleteStaff }) {
             </div>
 			<div className="row">
 				<div className="col-12 text-center">
-					<button className="btn btn-primary mx-2">Chỉnh sửa</button>
+					<button className="btn btn-primary mx-2" onClick={toggleForm}>Chỉnh sửa</button>
 					<button className="btn btn-danger mx-2" onClick={handleDelete}>Xóa bỏ</button>
 				</div>
 			</div>
+			<Modal isOpen={isFormOpen} toggle={toggleForm}>
+				<ModalBody>
+					<StaffForm departments={departments} 
+						action="Sửa"
+						initialValues={{
+							id, name, salaryScale, annualLeave, overTime,
+							department: department.index,
+							doB: dateFormat(doB, 'yyyy-mm-dd'),
+							startDate: dateFormat(startDate, 'yyyy-mm-dd'),
+						}} 
+						onSubmit={handleEditSubmit}
+					/>
+				</ModalBody>
+			</Modal>
         </div>
     )
 }

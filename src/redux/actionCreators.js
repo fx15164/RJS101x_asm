@@ -1,5 +1,31 @@
 import { baseUrl } from '../shared/baseUrl';
-import {ADD_STAFF, DELETE_STAFF, DEPARTMENTS_LOADING, STAFFS_LOADING} from './actionTypes';
+import {ADD_STAFF, DELETE_STAFF, DEPARTMENTS_LOADING, EDIT_STAFF, STAFFS_LOADING} from './actionTypes';
+
+export const editStaff = (staff) => dispatch => {
+	return fetch(`${baseUrl}/staffs`, {
+		method: 'PATCH',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(staff)
+	})
+		.then(response => {
+			if (response.ok) {
+				return response;
+			} else {
+				throw new Error(`${response.status}: ${response.statusText}`);
+			}
+		})
+		.then(response => response.json())
+		.then(staffs => {
+			dispatch({
+				type: EDIT_STAFF,
+				payload: staffs
+			})
+		})
+		.catch(e => console.log(e))
+}
 
 export const deleteStaff = (id) => dispatch => {
 	return fetch(`${baseUrl}/staffs/${id}`, {

@@ -26,7 +26,7 @@ const minLength = min => value =>
 const minLength2 = minLength(2);
 const maxLength30 = maxLength(30);
 
-const StaffForm = ({ handleSubmit, submitting, departments }) => {
+const StaffForm = ({ handleSubmit, submitting, departments, action}) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<Field name="name" label="Tên" 
@@ -69,7 +69,7 @@ const StaffForm = ({ handleSubmit, submitting, departments }) => {
 			/>
 			<div className="form-group row">
 				<div className="col offset-3">
-					<button className="btn btn-primary" type="submit" disabled={submitting}>Thêm</button>
+					<button className="btn btn-primary" type="submit" disabled={submitting}>{action ? action : 'Thêm'}</button>
 				</div>
 			</div>
 		</form>
